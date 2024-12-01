@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的個人網站</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center; /* 標題居中 */
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 20px; /* 向下移動 */
+            background-color: #ffffff;
+            z-index: 1000;
+        }
+
+        .hamburger {
+            position: absolute;
+            left: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -30%;
+            height: 100%;
+            width: 30%;
+            background-color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+            z-index: 1001;
+        }
+
+        .menu.open {
+            left: 0;
+        }
+
+        .menu .close-btn {
+            font-size: 24px;
+            text-align: right;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #000000;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+            margin-top: 60px; /* 避免與 Header 重疊 */
+        }
+
+        .top-section {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .top-section h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .top-section span {
+            font-size: 16px;
+            color: #888;
+            letter-spacing: 2px;
+        }
+
+        .bottom-section {
+            flex: 2;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .bottom-section .text-box {
+            display: flex;
+            align-items: flex-start;
+            margin: 1rem 0;
+        }
+
+        .bottom-section .text-box::before {
+            content: "";
+            width: 4px;
+            height: 100%;
+            background-color: #000000;
+            margin-right: 1rem;
+        }
+
+        .bottom-section .text-box h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 0.5rem;
+        }
+
+        .bottom-section .text-box p {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+        }
+
+        .black-corner {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12.5%; /* 16分之一 */
+            height: 12.5%; /* 16分之一 */
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </header>
+    <nav class="menu" id="menu">
+        <button class="close-btn" onclick="toggleMenu()">×</button>
+        <a href="/index.html">home</a>
+        <a href="/newarticle.html">article</a>
+        <a href="/new_artwork.html">artwork</a>
+        <a href="/aboutme.html">aboutme</a>
+    </nav>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <main class="main-content">
+        <section class="top-section">
+            <span>PRESENTATION TEMPLATE</span>
+            <h1>James</h1>
+        </section>
+        <section class="bottom-section">
+            <div class="text-box">
+                <div>
+                    <h2>Simple Text Here</h2>
+                    <p>Lorem ipsum dolor sit</p>
+                </div>
+            </div>
+            <div class="text-box">
+                <div>
+                    <h2>Text Here</h2>
+                    <p>Lorem ipsum dolor sit amet</p>
+                </div>
+            </div>
+            <div class="black-corner"></div>
+        </section>
+    </main>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            const overlay = document.getElementById("overlay");
+            const isOpen = menu.classList.toggle("open");
+            overlay.classList.toggle("show", isOpen);
+        }
+    </script>
+</body>
+</html>

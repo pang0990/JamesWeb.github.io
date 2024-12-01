@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Artwork</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Logo Section */
+        .logo-section {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .logo-section .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .logo-section .subtitle {
+            font-size: 18px;
+            color: #c0c0c0;
+            letter-spacing: 2px;
+            margin: 5px 0;
+        }
+
+        /* Navigation Section */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .navigation div {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .navigation div::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 1px;
+            width: 60%;
+            background-color: #ffffff;
+        }
+
+        /* Image Section */
+        .image-section {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-section .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .image-section .subtitle {
+            font-size: 16px;
+            color: #666666;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Description Section */
+        .description {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .description .column {
+            flex: 1;
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .description .column h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .description .column a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        /* Individual hover colors */
+        .description .column a[href="/CHAMELEON-823.html"]:hover {
+            color: #ff69b4; /* 粉色 */
+        }
+
+        .description .column a[href="/BED ROOM-918.html"]:hover {
+            color: #c3b091; /* 卡其色 */
+        }
+
+        .description .column a[href="/BATH ROOM-1002.html"]:hover {
+            color: #800080; /* 紫色 */
+        }
+
+        .description .column a[href="/LIVING ROOM-1110.html"]:hover {
+            color: #013220; /* 墨綠色 */
+        }
+
+        .description .column p {
+            margin: 5px 0;
+        }
+
+        /* Barcode Section */
+        .barcode-section {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px dashed #ffffff;
+        }
+
+        .barcode-section img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        /* Footer Section */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 12px;
+            border-top: 1px dashed #ffffff;
+            padding-top: 10px;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #a9a9a9; /* 懸停時變為淡灰色 */
+        }
+
+        /* Dashed Separator */
+        hr {
+            border: 0;
+            border-top: 1px dashed #ffffff;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <h1 class="logo">DEVISION® JAMES ART GALERIE</h1>
+            <div class="subtitle">視覺畫廊</div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="navigation">
+            <div>ART GALLERY</div>
+            <div>INSIDE VIEW</div>
+            <div>EXHIBITION SPACE</div>
+        </div>
+
+        <hr>
+
+        <!-- Image Section -->
+        <div class="image-section">
+            <div class="logo">DEVISION® JAMES ART GALERIE</div>
+            <div class="subtitle">視覺畫廊</div>
+        </div>
+
+        <!-- Description Section -->
+        <div class="description">
+            <div class="column">
+                <h3>DESCRIPTION</h3>
+                <p><a href="/CHAMELEON-823.html" title="View details about CHAMELEON-823">CHAMELEON-823</a></p>
+                <p><a href="/BED ROOM-918.html" title="View details about BED ROOM-918">BED ROOM-918</a></p>
+                <p><a href="/BATH ROOM-1002.html" title="View details about BATH ROOM-1002">BATH ROOM-1002</a></p>
+                <p><a href="/LIVING ROOM-1110.html" title="View details about LIVING ROOM-1110">LIVING ROOM-1110</a></p>
+            </div>
+            <div class="column">
+                <h3>AMOUNT</h3>
+                <p>908</p>
+                <p>1001</p>
+                <p>1101</p>
+                <p>9999</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Barcode Section -->
+        <div class="barcode-section">
+            <img src="https://via.placeholder.com/300x80" alt="Barcode">
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <div>DIVINEASEL</div>
+            <div><a href="/index.html" title="Back to homepage">home</a></div>
+            <div>14/06/2024</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BED ROOM-918</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Arial", sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #d4af37; /* 金色 */
+        }
+
+        .header p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #b0b0b0;
+        }
+
+        /* Specialization Section */
+        .specialization {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .specialization img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 15px; /* 圓角效果 */
+        }
+
+        .specialization .text-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .specialization .text-content h2 {
+            font-size: 28px;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .specialization .text-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .specialization .text-content .summary {
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+
+        /* Horizontal Project Section */
+        .horizontal-projects {
+            margin: 40px 0;
+        }
+
+        .horizontal-projects h2 {
+            font-size: 24px;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .horizontal-projects .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .horizontal-projects .grid-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            border-radius: 15px; /* 圓角效果 */
+        }
+
+        .horizontal-projects .grid-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Vertical Project Section */
+        .vertical-projects {
+            margin: 40px 0;
+        }
+
+        .vertical-projects h2 {
+            font-size: 24px;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .vertical-projects .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .vertical-projects .grid-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            border-radius: 15px; /* 圓角效果 */
+        }
+
+        .vertical-projects .grid-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer Links */
+        .footer {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .footer a {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            text-decoration: none;
+            border: 2px solid #d4af37;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            background-color: #d4af37;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>BED ROOM-918</h1>
+            <p>
+                We design modern bedrooms that combine style and comfort, 
+                ensuring a relaxing experience. Explore our specialization and projects below.
+            </p>
+        </div>
+
+        <!-- Specialization Section -->
+        <div class="specialization">
+            <!-- Left: Text Content -->
+            <div class="text-content">
+                <h2>Our Specialization</h2>
+                <p>
+                    We specialize in designing modern and elegant bedroom interiors that cater to the needs of every individual. 
+                    Our projects reflect a perfect balance of style and functionality.
+                </p>
+                <p class="summary">
+                    Whether you are looking for minimalistic designs or luxurious interiors, we have the expertise to bring your vision to life.
+                </p>
+            </div>
+
+            <!-- Right: Image -->
+            <img src="/BED ROOM-918IMG/BED ROOM-91801.jpg" alt="Specialization Main Image">
+        </div>
+
+        <!-- Horizontal Project Section -->
+        <div class="horizontal-projects">
+            <h2>Horizontal Projects</h2>
+            <div class="grid">
+                <div class="grid-item">
+                    <img src="/BED ROOM-918IMG/BED ROOM-91802.jpg" alt="Horizontal Project 1">
+                </div>
+                <div class="grid-item">
+                    <img src="/BED ROOM-918IMG/BED ROOM-91803.jpg" alt="Horizontal Project 2">
+                </div>
+                <div class="grid-item">
+                    <img src="/BED ROOM-918IMG/BED ROOM-91804.jpg" alt="Horizontal Project 3">
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical Project Section -->
+        <div class="vertical-projects">
+            <h2>Vertical Projects</h2>
+            <div class="grid">
+                <div class="grid-item">
+                    <img src="/BED ROOM-918IMG/BED ROOM-91805.jpg" alt="Vertical Project 1">
+                </div>
+                <div class="grid-item">
+                    <img src="/BED ROOM-918IMG/BED ROOM-91806.jpg" alt="Vertical Project 2">
+                </div>
+                <div class="grid-item">
+                    <img src="/BED ROOM-918IMG/BED ROOM-91807.jpg" alt="Vertical Project 3">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="footer">
+            <a href="/new_artwork.html">View More Artworks</a>
+            <a href="/index.html">Return to Homepage</a>
+        </div>
+    </div>
+</body>
+</html>
