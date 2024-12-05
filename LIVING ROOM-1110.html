@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster Style</title>
+    <style>
+        /* 通用樣式 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .poster {
+            background-color: #111;
+            color: #fff;
+            width: 80%;
+            max-width: 90%;
+            padding: 5%;
+            text-align: center;
+            border: 1% solid #333;
+            box-shadow: 0 4% 10% rgba(0, 0, 0, 0.8);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 5%;
+            border: 1% solid #333;
+        }
+
+        .text-container {
+            padding: 0 5%;
+        }
+
+        .description {
+            font-size: 100%;
+            line-height: 1.6;
+            margin-bottom: 5%;
+            color: #ddd;
+        }
+
+        .title {
+            font-size: 120%;
+            margin-bottom: 3%;
+            letter-spacing: 0.1em;
+            font-weight: bold;
+        }
+
+        .artist {
+            font-size: 200%;
+            letter-spacing: 0.2em;
+            font-weight: bold;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .poster {
+                width: 90%;
+                padding: 5%;
+            }
+
+            .description {
+                font-size: 90%;
+            }
+
+            .title {
+                font-size: 110%;
+            }
+
+            .artist {
+                font-size: 170%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .poster {
+                width: 95%;
+                padding: 5%;
+            }
+
+            .description {
+                font-size: 80%;
+            }
+
+            .title {
+                font-size: 100%;
+            }
+
+            .artist {
+                font-size: 150%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="image-container">
+            <img src="your-image.jpg" alt="Latona and the Lycian Peasants">
+        </div>
+        <div class="text-container">
+            <p class="description">
+                No one insults a goddess and remains unpunished. Tired and
+                parched, Latona, the mother of Apollo and Diana, halted to quench
+                her thirst at a pond. Some peasants working nearby haughtily
+                prevent her from doing so. Latona, in a rage, turns them by
+                throwing them into frogs and condemning them to spend eternity
+                in the mire.
+            </p>
+            <h2 class="title">LATONA AND THE LYCIAN PEASANTS</h2>
+            <h1 class="artist">JAN BRUEGHEL</h1>
+        </div>
+    </div>
+</body>
+</html>
