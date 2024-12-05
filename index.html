@@ -19,21 +19,22 @@
             display: flex;
             justify-content: center; /* 標題居中 */
             align-items: center;
-            padding: 10px 20px;
+            padding: 2% 5%; /* 使用百分比 */
             position: fixed;
             width: 100%;
-            top: 20px; /* 向下移動 */
+            top: 2%; /* 向下移動 */
             background-color: #ffffff;
             z-index: 1000;
         }
 
         .hamburger {
             position: absolute;
-            left: 20px;
-            font-size: 24px;
+            left: 5%;
+            font-size: 150%; /* 使用百分比 */
             cursor: pointer;
             border: none;
             background: none;
+            color: #000000; /* 修復手機模式變藍色問題 */
         }
 
         .menu {
@@ -42,11 +43,12 @@
             left: -30%;
             height: 100%;
             width: 30%;
-            background-color: #ffffff;
+            background-color: #000000; /* 修復手機模式背景變藍 */
+            color: #ffffff;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            padding-top: 20px;
+            padding-top: 5%;
             transition: left 0.3s ease;
             z-index: 1001;
         }
@@ -56,23 +58,24 @@
         }
 
         .menu .close-btn {
-            font-size: 24px;
+            font-size: 150%;
             text-align: right;
-            padding: 10px 20px;
+            padding: 5%;
             cursor: pointer;
             border: none;
             background: none;
+            color: #ffffff;
         }
 
         .menu a {
             text-decoration: none;
-            color: #000000;
-            padding: 10px 20px;
+            color: #ffffff;
+            padding: 5%;
             display: block;
         }
 
         .menu a:hover {
-            background-color: #f0f0f0;
+            background-color: #333333; /* 提供 hover 效果 */
         }
 
         .overlay {
@@ -95,7 +98,7 @@
             flex-direction: column;
             flex: 1;
             overflow: hidden;
-            margin-top: 60px; /* 避免與 Header 重疊 */
+            margin-top: 10%; /* 避免與 Header 重疊 */
         }
 
         .top-section {
@@ -104,18 +107,18 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 2rem;
+            padding: 5%;
             text-align: center;
         }
 
         .top-section h1 {
-            font-size: 48px;
+            font-size: 400%; /* 使用百分比 */
             font-weight: bold;
             margin: 0;
         }
 
         .top-section span {
-            font-size: 16px;
+            font-size: 100%;
             color: #888;
             letter-spacing: 2px;
         }
@@ -126,32 +129,32 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 2rem;
+            padding: 5%;
             position: relative;
         }
 
         .bottom-section .text-box {
             display: flex;
             align-items: flex-start;
-            margin: 1rem 0;
+            margin: 2% 0;
         }
 
         .bottom-section .text-box::before {
             content: "";
-            width: 4px;
+            width: 1%;
             height: 100%;
             background-color: #000000;
-            margin-right: 1rem;
+            margin-right: 2%;
         }
 
         .bottom-section .text-box h2 {
-            font-size: 18px;
+            font-size: 150%; /* 使用百分比 */
             font-weight: bold;
-            margin: 0 0 0.5rem;
+            margin: 0 0 1%;
         }
 
         .bottom-section .text-box p {
-            font-size: 14px;
+            font-size: 100%; /* 使用百分比 */
             color: #555;
             margin: 0;
         }
@@ -172,10 +175,10 @@
     </header>
     <nav class="menu" id="menu">
         <button class="close-btn" onclick="toggleMenu()">×</button>
-        <a href="index.html">home</a>
-        <a href="newarticle.html">article</a>
-        <a href="new_artwork.html">artwork</a>
-        <a href="aboutme.html">aboutme</a>
+        <a href="index.html">Home</a>
+        <a href="newarticle.html">Article</a>
+        <a href="new_artwork.html">Artwork</a>
+        <a href="aboutme.html">About Me</a>
     </nav>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     <main class="main-content">
