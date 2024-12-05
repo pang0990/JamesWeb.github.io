@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -24,16 +24,16 @@
         /* Header Section */
         .header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 5%;
         }
 
         .header h1 {
-            font-size: 36px;
+            font-size: 2.5rem;
             color: #d4af37; /* 金色 */
         }
 
         .header p {
-            font-size: 18px;
+            font-size: 1.2rem;
             line-height: 1.6;
             color: #b0b0b0;
         }
@@ -42,121 +42,201 @@
         .specialization {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 5%;
             align-items: center;
-            margin: 40px 0;
+            margin: 5% 0;
         }
 
         .specialization img {
             width: 100%;
-            max-height: 400px;
+            height: auto;
             object-fit: cover;
-            border-radius: 15px; /* 圓角效果 */
+            border-radius: 15%;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .specialization img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
         .specialization .text-content {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 20px;
+            padding: 5%;
         }
 
         .specialization .text-content h2 {
-            font-size: 28px;
+            font-size: 2rem;
             color: #d4af37;
-            margin-bottom: 20px;
+            margin-bottom: 5%;
         }
 
         .specialization .text-content p {
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 5%;
         }
 
         .specialization .text-content .summary {
-            font-size: 14px;
+            font-size: 0.9rem;
             color: #b0b0b0;
         }
 
         /* Horizontal Project Section */
         .horizontal-projects {
-            margin: 40px 0;
+            margin: 5% 0;
         }
 
         .horizontal-projects h2 {
-            font-size: 24px;
+            font-size: 1.5rem;
             color: #d4af37;
-            margin-bottom: 20px;
+            margin-bottom: 5%;
         }
 
         .horizontal-projects .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 5%;
         }
 
         .horizontal-projects .grid-item img {
             width: 100%;
             height: auto;
             object-fit: cover;
-            transition: transform 0.3s ease;
-            border-radius: 15px; /* 圓角效果 */
+            border-radius: 15%;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .horizontal-projects .grid-item:hover img {
-            transform: scale(1.1);
+        .horizontal-projects .grid-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
         /* Vertical Project Section */
         .vertical-projects {
-            margin: 40px 0;
+            margin: 5% 0;
         }
 
         .vertical-projects h2 {
-            font-size: 24px;
+            font-size: 1.5rem;
             color: #d4af37;
-            margin-bottom: 20px;
+            margin-bottom: 5%;
         }
 
         .vertical-projects .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 5%;
         }
 
         .vertical-projects .grid-item img {
             width: 100%;
-            height: 350px;
+            height: auto;
             object-fit: cover;
-            transition: transform 0.3s ease;
-            border-radius: 15px; /* 圓角效果 */
+            border-radius: 15%;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .vertical-projects .grid-item:hover img {
-            transform: scale(1.1);
+        .vertical-projects .grid-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Modal for Image Preview */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
         }
 
         /* Footer Links */
         .footer {
-            text-align: center;
-            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            margin: 5% auto;
+            gap: 5%;
+        }
+
+        .footer .left-link,
+        .footer .right-link {
+            width: 40%;
         }
 
         .footer a {
-            display: inline-block;
-            margin: 0 15px;
-            padding: 10px 20px;
-            font-size: 16px;
+            display: block;
+            padding: 1% 2%;
+            font-size: 1rem;
             color: #ffffff;
             text-decoration: none;
             border: 2px solid #d4af37;
             border-radius: 30px;
+            text-align: center;
             transition: all 0.3s ease;
         }
 
         .footer a:hover {
             background-color: #d4af37;
             color: #1a1a1a;
+        }
+
+        /* Responsive for Mobile */
+        @media (max-width: 768px) {
+            .specialization {
+                grid-template-columns: 1fr;
+                gap: 3%;
+            }
+            .specialization img {
+                order: -1; /* 將圖片移動到文字內容之前 */
+            }
+            .horizontal-projects .grid,
+            .vertical-projects .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 3%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .specialization .text-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .horizontal-projects h2,
+            .vertical-projects h2 {
+                font-size: 1.2rem;
+            }
+
+            .footer {
+                flex-direction: row;
+            }
+
+            .footer .left-link,
+            .footer .right-link {
+                width: 45%;
+            }
+
+            .footer a {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -173,7 +253,6 @@
 
         <!-- Specialization Section -->
         <div class="specialization">
-            <!-- Left: Text Content -->
             <div class="text-content">
                 <h2>Our Specialization</h2>
                 <p>
@@ -184,9 +263,7 @@
                     Whether you are looking for minimalistic designs or luxurious interiors, we have the expertise to bring your vision to life.
                 </p>
             </div>
-
-            <!-- Right: Image -->
-            <img src="BED ROOM-918IMG/BED ROOM-91801.jpg" alt="Specialization Main Image">
+            <img src="BED ROOM-918IMG/BED ROOM-91801.jpg" alt="Specialization Main Image" onclick="openModal(this.src)">
         </div>
 
         <!-- Horizontal Project Section -->
@@ -194,13 +271,13 @@
             <h2>Horizontal Projects</h2>
             <div class="grid">
                 <div class="grid-item">
-                    <img src="BED ROOM-918IMG/BED ROOM-91802.jpg" alt="Horizontal Project 1">
+                    <img src="BED ROOM-918IMG/BED ROOM-91802.jpg" alt="Horizontal Project 1" onclick="openModal(this.src)">
                 </div>
                 <div class="grid-item">
-                    <img src="BED ROOM-918IMG/BED ROOM-91803.jpg" alt="Horizontal Project 2">
+                    <img src="BED ROOM-918IMG/BED ROOM-91803.jpg" alt="Horizontal Project 2" onclick="openModal(this.src)">
                 </div>
                 <div class="grid-item">
-                    <img src="BED ROOM-918IMG/BED ROOM-91804.jpg" alt="Horizontal Project 3">
+                    <img src="BED ROOM-918IMG/BED ROOM-91804.jpg" alt="Horizontal Project 3" onclick="openModal(this.src)">
                 </div>
             </div>
         </div>
@@ -210,22 +287,45 @@
             <h2>Vertical Projects</h2>
             <div class="grid">
                 <div class="grid-item">
-                    <img src="BED ROOM-918IMG/BED ROOM-91805.jpg" alt="Vertical Project 1">
+                    <img src="BED ROOM-918IMG/BED ROOM-91805.jpg" alt="Vertical Project 1" onclick="openModal(this.src)">
                 </div>
                 <div class="grid-item">
-                    <img src="BED ROOM-918IMG/BED ROOM-91806.jpg" alt="Vertical Project 2">
+                    <img src="BED ROOM-918IMG/BED ROOM-91806.jpg" alt="Vertical Project 2" onclick="openModal(this.src)">
                 </div>
                 <div class="grid-item">
-                    <img src="BED ROOM-918IMG/BED ROOM-91807.jpg" alt="Vertical Project 3">
+                    <img src="BED ROOM-918IMG/BED ROOM-91807.jpg" alt="Vertical Project 3" onclick="openModal(this.src)">
                 </div>
             </div>
         </div>
 
         <!-- Footer Links -->
         <div class="footer">
-            <a href="new_artwork.html">View More Artworks</a>
-            <a href="index.html">Return to Homepage</a>
+            <div class="left-link">
+                <a href="new_artwork.html">View More Artworks</a>
+            </div>
+            <div class="right-link">
+                <a href="index.html">Return to Homepage</a>
+            </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" id="image-modal" onclick="closeModal()">
+        <img id="modal-image" src="">
+    </div>
+
+    <script>
+        function openModal(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            modalImage.src = src;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
