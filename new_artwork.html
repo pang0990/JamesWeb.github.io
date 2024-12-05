@@ -25,32 +25,30 @@
             box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* Logo Section */
         .logo-section {
             margin-bottom: 20px;
             position: relative;
         }
 
         .logo-section .logo {
-            font-size: 24px;
+            font-size: 2em; /* 相對比例 */
             font-weight: bold;
             margin: 0;
         }
 
         .logo-section .subtitle {
-            font-size: 18px;
+            font-size: 1.5em;
             color: #c0c0c0;
-            letter-spacing: 2px;
+            letter-spacing: 0.2em;
             margin: 5px 0;
         }
 
-        /* Navigation Section */
         .navigation {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 1em;
         }
 
         .navigation div {
@@ -70,44 +68,43 @@
             background-color: #ffffff;
         }
 
-        /* Image Section */
         .image-section {
             background-color: #ffffff;
             color: #000000;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 5%;
+            margin: 5% 0;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
 
         .image-section .logo {
-            font-size: 20px;
+            font-size: 1.8em;
             font-weight: bold;
             margin: 0;
         }
 
         .image-section .subtitle {
-            font-size: 16px;
+            font-size: 1.2em;
             color: #666666;
-            letter-spacing: 1px;
+            letter-spacing: 0.1em;
             margin-top: 5px;
         }
 
-        /* Description Section */
         .description {
             display: flex;
             justify-content: space-between;
-            margin: 20px 0;
+            margin: 5% 0;
         }
 
         .description .column {
             flex: 1;
             text-align: left;
-            font-size: 14px;
+            font-size: 1em;
             line-height: 1.5;
+            padding: 0 10px; /* 增加左右間距，讓小螢幕更清晰 */
         }
 
         .description .column h3 {
-            font-size: 12px;
+            font-size: 1em;
             text-transform: uppercase;
             margin-bottom: 10px;
         }
@@ -118,31 +115,25 @@
             transition: color 0.3s;
         }
 
-        /* Individual hover colors */
         .description .column a[href="/CHAMELEON-823.html"]:hover {
-            color: #ff69b4; /* 粉色 */
+            color: #ff69b4;
         }
 
         .description .column a[href="/BED ROOM-918.html"]:hover {
-            color: #c3b091; /* 卡其色 */
+            color: #c3b091;
         }
 
         .description .column a[href="/BATH ROOM-1002.html"]:hover {
-            color: #800080; /* 紫色 */
+            color: #800080;
         }
 
         .description .column a[href="/LIVING ROOM-1110.html"]:hover {
-            color: #013220; /* 墨綠色 */
+            color: #013220;
         }
 
-        .description .column p {
-            margin: 5px 0;
-        }
-
-        /* Barcode Section */
         .barcode-section {
-            margin: 20px 0;
-            padding: 10px;
+            margin: 5% 0;
+            padding: 5%;
             border: 1px dashed #ffffff;
         }
 
@@ -152,14 +143,13 @@
             height: auto;
         }
 
-        /* Footer Section */
         .footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
-            font-size: 12px;
+            margin-top: 5%;
+            font-size: 1em;
             border-top: 1px dashed #ffffff;
-            padding-top: 10px;
+            padding-top: 5%;
         }
 
         .footer a {
@@ -169,14 +159,57 @@
         }
 
         .footer a:hover {
-            color: #a9a9a9; /* 懸停時變為淡灰色 */
+            color: #a9a9a9;
         }
 
-        /* Dashed Separator */
         hr {
             border: 0;
             border-top: 1px dashed #ffffff;
-            margin: 20px 0;
+            margin: 5% 0;
+        }
+
+        /* 手機版調整 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .logo-section .logo {
+                font-size: 1.5em;
+            }
+
+            .logo-section .subtitle {
+                font-size: 1.2em;
+            }
+
+            .navigation {
+                font-size: 0.8em;
+            }
+
+            .image-section {
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .image-section .logo {
+                font-size: 1.5em;
+            }
+
+            .image-section .subtitle {
+                font-size: 1em;
+            }
+
+            .description {
+                font-size: 0.9em;
+            }
+
+            .description .column {
+                padding: 0 5px; /* 縮小內間距 */
+            }
+
+            .footer {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
