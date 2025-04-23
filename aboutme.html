@@ -148,7 +148,51 @@
       object-fit: contain;
       display: block;
     }
-  </style>
+    @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    header nav {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 10px;
+    }
+    header nav a {
+      margin: 10px 0 0 0;
+    }
+    .poster-section img {
+      margin-bottom: 60px;
+    }
+    .gallery-section {
+      padding: 0 20px;
+      grid-template-columns: 1fr;
+    }
+    .modal-inner {
+      width: 95vw;
+      height: 95vh;
+      padding: 20px;
+    }
+    .modal-content-wrapper {
+      flex-direction: column;
+      gap: 20px;
+      height: auto;
+    }
+    .modal-image {
+      max-width: 100%;
+      height: auto;
+    }
+    .modal-image img {
+      height: auto;
+      max-height: 300px;
+    }
+    .modal-text {
+      max-height: none;
+    }
+  }
+</style>
 </head>
 <body>
   <header>
