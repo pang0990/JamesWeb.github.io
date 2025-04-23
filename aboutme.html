@@ -406,13 +406,44 @@ images.forEach((img, i) => {
         textBox.style.background = '#f6f3ee';
         textBox.style.marginTop = '10px';
         textBox.style.whiteSpace = 'pre-line';
-        textBox.innerHTML = `<h3 style='margin-top:0;'>${artwork.title}</h3><p>${artwork.content}</p>`;
+        textBox.style.borderTop = '1px solid #ccc';
+        textBox.style.fontSize = '0.95rem';
+        textBox.style.lineHeight = '1.8';
+        textBox.style.fontFamily = 'Georgia, serif';
+        textBox.innerHTML = `<h3 style='margin-top:0; font-size:1.1rem; font-weight:bold;'>${artwork.title}</h3><p style='margin: 12px 0 0;'>${artwork.content}</p>`;'>${artwork.title}</h3><p>${artwork.content}</p>`;
 
         infoToggle.addEventListener('click', () => {
-          const showing = textBox.style.display === 'block';
-          textBox.style.display = showing ? 'none' : 'block';
-          infoToggle.innerHTML = showing ? '+ Show Info' : '- Less Info';
-        });
+  const showing = textBox.style.display === 'block';
+  textBox.style.display = showing ? 'none' : 'block';
+  infoToggle.style.display = 'none';
+
+  if (!showing) {
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = '- Less Info';
+    closeBtn.style.display = 'block';
+    closeBtn.style.marginTop = '12px';
+    closeBtn.style.background = 'transparent';
+    closeBtn.style.border = 'none';
+    closeBtn.style.borderRadius = '0';
+    closeBtn.style.padding = '4px 8px';
+    closeBtn.style.fontSize = '0.9rem';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.style.boxShadow = 'none';
+    closeBtn.style.transition = 'all 0.2s ease-in-out';
+    closeBtn.style.fontWeight = 'normal';
+    closeBtn.style.width = 'fit-content';
+    closeBtn.style.marginLeft = '0';
+    closeBtn.style.color = '#000';
+
+    closeBtn.addEventListener('click', () => {
+      textBox.style.display = 'none';
+      closeBtn.remove();
+      infoToggle.style.display = 'block';
+    });
+
+    textBox.appendChild(closeBtn);
+  }
+});
 
         wrapper.appendChild(newImg);
         wrapper.appendChild(infoToggle);
