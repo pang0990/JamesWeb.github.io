@@ -106,13 +106,14 @@
       overflow-y: auto;
     }
     #modal-close {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 22px;
-      cursor: pointer;
-      color: #000;
-    }
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #000;
+  z-index: 1001;
+}
     .modal-content-wrapper {
       display: flex;
       flex-direction: row;
@@ -149,6 +150,11 @@
       display: block;
     }
     @media (max-width: 768px) {
+  #modal-close {
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
+  }
     header {
       flex-direction: column;
       align-items: flex-start;
@@ -339,18 +345,20 @@ long before we ever said a word about it.`
 
     const images = document.querySelectorAll('#gallery img');
 images.forEach((img, i) => {
-  img.setAttribute('data-index', i);
-  img.addEventListener('click', (e) => {
-    const index = e.currentTarget.getAttribute('data-index');
-    const artwork = artworks[index];
-    if (artwork) {
-      titleEl.innerText = artwork.title;
-      contentEl.innerText = artwork.content;
-      imgEl.src = img.src;
-      modal.style.display = 'flex';
-    }
-  });
-});
+  if (window.innerWidth > 768) {
+    img.setAttribute('data-index', i);
+    img.addEventListener('click', (e) => {
+      const index = e.currentTarget.getAttribute('data-index');
+      const artwork = artworks[index];
+      if (artwork) {
+        titleEl.innerText = artwork.title;
+        contentEl.innerText = artwork.content;
+        imgEl.src = img.src;
+        modal.style.display = 'flex';
+      }
+    });
+  }
+})
     closeBtn.addEventListener('click', () => {
       modal.style.display = 'none';
     });
@@ -359,5 +367,55 @@ images.forEach((img, i) => {
       if (e.target === modal) modal.style.display = 'none';
     });
   </script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.innerWidth <= 768) {
+      const galleryImages = document.querySelectorAll('#gallery img');
+      galleryImages.forEach((img, i) => {
+        const artwork = artworks[i];
+        if (!artwork) return;
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.marginBottom = '40px';
+
+        const newImg = img.cloneNode(true);
+        newImg.style.display = 'block';
+        newImg.style.width = '100%';
+        newImg.style.height = 'auto';
+
+        const infoToggle = document.createElement('button');
+        infoToggle.innerHTML = '+ Show Info';
+        infoToggle.style.position = 'absolute';
+        infoToggle.style.bottom = '10px';
+        infoToggle.style.left = '10px';
+        infoToggle.style.zIndex = '10';
+        infoToggle.style.background = '#f6f3ee';
+        infoToggle.style.border = '1px solid #ccc';
+        infoToggle.style.padding = '6px 12px';
+        infoToggle.style.fontSize = '0.85rem';
+        infoToggle.style.cursor = 'pointer';
+
+        const textBox = document.createElement('div');
+        textBox.style.display = 'none';
+        textBox.style.padding = '20px';
+        textBox.style.background = '#f6f3ee';
+        textBox.style.marginTop = '10px';
+        textBox.style.whiteSpace = 'pre-line';
+        textBox.innerHTML = `<h3 style='margin-top:0;'>${artwork.title}</h3><p>${artwork.content}</p>`;
+
+        infoToggle.addEventListener('click', () => {
+          const showing = textBox.style.display === 'block';
+          textBox.style.display = showing ? 'none' : 'block';
+          infoToggle.innerHTML = showing ? '+ Show Info' : '- Less Info';
+        });
+
+        wrapper.appendChild(newImg);
+        wrapper.appendChild(infoToggle);
+        wrapper.appendChild(textBox);
+        img.replaceWith(wrapper);
+      });
+    }
+  });
+</script>
 </body>
 </html>
