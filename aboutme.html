@@ -385,15 +385,20 @@ images.forEach((img, i) => {
 
         const infoToggle = document.createElement('button');
         infoToggle.innerHTML = '+ Show Info';
-        infoToggle.style.position = 'absolute';
-        infoToggle.style.bottom = '10px';
-        infoToggle.style.left = '10px';
-        infoToggle.style.zIndex = '10';
+        infoToggle.style.display = 'block';
+        infoToggle.style.marginTop = '12px';
         infoToggle.style.background = '#f6f3ee';
-        infoToggle.style.border = '1px solid #ccc';
-        infoToggle.style.padding = '6px 12px';
-        infoToggle.style.fontSize = '0.85rem';
+        infoToggle.style.border = 'none';
+        infoToggle.style.borderRadius = '50px';
+        infoToggle.style.padding = '8px 16px';
+        infoToggle.style.fontSize = '0.9rem';
         infoToggle.style.cursor = 'pointer';
+        infoToggle.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.15)';
+        infoToggle.style.transition = 'all 0.2s ease-in-out';
+        infoToggle.style.fontWeight = 'bold';
+        infoToggle.style.width = 'fit-content';
+        infoToggle.style.marginLeft = 'auto';
+        infoToggle.style.marginRight = 'auto';
 
         const textBox = document.createElement('div');
         textBox.style.display = 'none';
