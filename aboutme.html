@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A House Full Of Love</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+    body {
+      margin: 0;
+      background-color: #f6f3ee;
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.2px;
+      color: #000;
+    }
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(246, 243, 238, 0.95);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .brand-signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+    }
+    .brand-title {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    header nav a {
+      margin-left: 20px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .poster-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 100px;
+    }
+    .gallery-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 8px;
+      margin-bottom: 100px;
+      padding: 0 40px;
+    }
+    .gallery-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-section img:hover {
+      transform: scale(1.02);
+    }
+    .footer {
+      background-color: #e6e2da;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      color: #444;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+    .modal-inner {
+      background: #f6f3ee;
+      width: 1000px;
+      height: 90vh;
+      padding: 40px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+    }
+    #modal-close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #000;
+    }
+    .modal-content-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      height: 100%;
+    }
+    .modal-text {
+      flex: 1;
+      color: #000;
+      font-size: 1rem;
+      white-space: pre-line;
+      line-height: 1.8;
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.2px;
+      overflow-y: auto;
+      max-height: 100%;
+    }
+    .modal-text h3 {
+      margin-top: 0;
+      font-weight: bold;
+    }
+    .modal-image {
+      flex: 1;
+      max-width: 50%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-signature">James</div>
+      <div class="brand-title">A House Full Of Love</div>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="poster-section">
+    <img src="your-main-poster.jpg" alt="Main Poster" />
+  </section>
+
+  <section id="gallery" class="gallery-section">
+    <img src="houseimg/badroom10.jpg" alt="Artwork 1" />
+    <img src="houseimg/bathroom10.jpg" alt="Artwork 2" />
+    <img src="houseimg/movie10.jpg" alt="Artwork 3" />
+    <img src="your-artwork-4.jpg" alt="Artwork 4" />
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>"Art enables us to find ourselves and lose ourselves at the same time."</p>
+  </footer>
+
+  <div id="modal">
+    <div class="modal-inner">
+      <span id="modal-close">&times;</span>
+      <div class="modal-content-wrapper">
+        <div class="modal-text">
+          <h3 id="modal-title"></h3>
+          <p id="modal-content"></p>
+        </div>
+        <div class="modal-image">
+          <img id="modal-img" src="" alt="Artwork" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const titleEl = document.getElementById('modal-title');
+    const contentEl = document.getElementById('modal-content');
+    const imgEl = document.getElementById('modal-img');
+    const closeBtn = document.getElementById('modal-close');
+
+    const artworks = [
+      {
+        title: 'The Last Day of the World',
+        content: `那天，世界彷彿走到了盡頭。
+電視還在搜尋訊號，一切已燃燒成一朵蘑菇雲。
+但我們躺在床上，什麼也沒說，纏綿著對方，彷彿一切與我們無關。
+
+那一刻我忽然明白，
+如果結局真的來了，
+只要你在我身邊，就夠了。
+
+That day, the world felt like it had come to an end.
+The TV still searched for signal,
+while everything outside had already bloomed into a mushroom cloud.
+But we lay in bed, saying nothing,
+entwined with one another —
+as if none of it had anything to do with us.
+
+In that moment, I understood:
+if the end truly comes,
+having you beside me is enough.`
+      },
+      {
+        title: 'Love Don’t Be Shy',
+        content: `當我們浸在滿是泡泡的浴缸裡，
+彷彿整個宇宙都悄悄被邀請了進來，
+靜靜地圍繞在我們身邊。
+
+那天的月亮特別低，
+像是偷偷躲進了我們的浴室。
+
+當我們一同指著月亮，
+就像平常那些瞬間——
+總能不經意地完成彼此。
+
+它沒有承諾「永遠」，
+卻從沒離開過。
+
+As we sank into the bubbles,
+it felt like the whole universe had quietly gathered around us,
+watching without a word.
+
+The moon was especially low that night,
+as if it had hidden inside our bathroom.
+
+When we both pointed at it,
+it reminded me of all those little moments —
+the way we finish each other
+without ever trying.
+
+You never said "forever."
+But somehow,
+you never left.`
+      },
+      {
+        title: 'A Late-Night Conversation',
+        content: `我不知道從什麼時候開始，
+我們的日子變得像電影一樣。
+
+不是因為情節有多戲劇化，
+而是因為每一個眼神、每一個碰觸、
+每一次你突然笑出來的樣子，
+都像是早就安排好的畫面，
+剛剛好，剛剛好地落在我心上。
+
+我們沒有劇本，沒有誰在導戲，
+卻不知不覺就走進了彼此的鏡頭裡。
+你是我畫面裡的主角，
+也是我每天都會重播的那一段。
+
+也許我們真的在不說出口的時候，
+早就愛得很深了。
+
+I don’t know when it started,
+but somehow our days began to feel like a film.
+
+Not because the story was dramatic,
+but because every glance, every touch,
+every time you laughed out of nowhere,
+felt like a scene perfectly placed —
+quietly landing right on my heart.
+
+There was no script, no director,
+and yet we walked into each other’s frame without even noticing.
+You are the lead in all my scenes,
+the one I play back again and again.
+
+Maybe we really did fall in love,
+long before we ever said a word about it.`
+      }
+    ];;
+
+    const images = document.querySelectorAll('#gallery img');
+images.forEach((img, i) => {
+  img.setAttribute('data-index', i);
+  img.addEventListener('click', (e) => {
+    const index = e.currentTarget.getAttribute('data-index');
+    const artwork = artworks[index];
+    if (artwork) {
+      titleEl.innerText = artwork.title;
+      contentEl.innerText = artwork.content;
+      imgEl.src = img.src;
+      modal.style.display = 'flex';
+    }
+  });
+});
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
