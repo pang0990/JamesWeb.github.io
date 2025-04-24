@@ -410,7 +410,7 @@ images.forEach((img, i) => {
         textBox.style.fontSize = '0.95rem';
         textBox.style.lineHeight = '1.8';
         textBox.style.fontFamily = 'Georgia, serif';
-        textBox.innerHTML = `<h3 style='margin-top:0; font-size:1.1rem; font-weight:bold;'>${artwork.title}</h3><p style='margin: 12px 0 0;'>${artwork.content}</p>`;'>${artwork.title}</h3><p>${artwork.content}</p>`;
+        textBox.innerHTML = `<h3 style='margin-top:0; font-size:1.1rem; font-weight:bold;'>${artwork.title}</h3><p style='margin: 12px 0 0;'>${artwork.content}</p>`;
 
         infoToggle.addEventListener('click', () => {
   const showing = textBox.style.display === 'block';
