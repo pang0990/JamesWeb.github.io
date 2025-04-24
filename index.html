@@ -28,27 +28,6 @@
             z-index: 1000;
         }
 
-        @keyframes signatureWrite {
-            0% {
-                width: 0;
-                opacity: 0;
-            }
-            100% {
-                width: 100%;
-                opacity: 1;
-            }
-        }
-
-        .top-section h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            margin: 0.5rem 0 0;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 0.1em solid rgba(0,0,0,0);
-            animation: signatureWrite 2.2s ease-out forwards;
-        }
-
         .hamburger {
             position: absolute;
             left: 5%;
@@ -57,6 +36,7 @@
             border: none;
             background: none;
             color: #000000;
+            z-index: 1002;
         }
 
         .menu {
@@ -109,11 +89,14 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
             z-index: 1000;
         }
 
         .overlay.show {
             display: block;
+            opacity: 1;
         }
 
         .main-content {
@@ -122,6 +105,7 @@
             flex: 1;
             overflow: hidden;
             margin-top: 10%;
+            padding-top: 60px;
         }
 
         .top-section {
@@ -133,6 +117,16 @@
             align-items: center;
             padding: 5%;
             text-align: center;
+        }
+
+        .top-section h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            margin: 0.5rem 0 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 0.1em solid rgba(0,0,0,0);
+            animation: signatureWrite 2.2s ease-out forwards;
         }
 
         .top-section .subtitle {
@@ -181,6 +175,17 @@
         @media (max-width: 480px) {
             .menu {
                 width: 85%;
+            }
+        }
+
+        @keyframes signatureWrite {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            100% {
+                width: 100%;
+                opacity: 1;
             }
         }
     </style>
