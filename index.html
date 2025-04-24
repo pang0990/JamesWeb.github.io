@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的個人網站</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -17,33 +18,55 @@
 
         .header {
             display: flex;
-            justify-content: center; /* 標題居中 */
+            justify-content: center;
             align-items: center;
-            padding: 2% 5%; /* 使用百分比 */
+            padding: 2% 5%;
             position: fixed;
             width: 100%;
-            top: 2%; /* 向下移動 */
+            top: 0;
             background-color: #ffffff;
             z-index: 1000;
+        }
+
+        @keyframes signatureWrite {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            100% {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+
+        .top-section h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            margin: 0.5rem 0 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 0.1em solid rgba(0,0,0,0);
+            animation: signatureWrite 2.2s ease-out forwards;
         }
 
         .hamburger {
             position: absolute;
             left: 5%;
-            font-size: 150%; /* 使用百分比 */
+            font-size: 150%;
             cursor: pointer;
             border: none;
             background: none;
-            color: #000000; /* 修復手機模式變藍色問題 */
+            color: #000000;
         }
 
         .menu {
             position: fixed;
             top: 0;
-            left: -30%;
+            left: -70%;
             height: 100%;
-            width: 30%;
-            background-color: #000000; /* 修復手機模式背景變藍 */
+            width: 70%;
+            max-width: 320px;
+            background-color: #000000;
             color: #ffffff;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -75,7 +98,7 @@
         }
 
         .menu a:hover {
-            background-color: #333333; /* 提供 hover 效果 */
+            background-color: #333333;
         }
 
         .overlay {
@@ -98,7 +121,7 @@
             flex-direction: column;
             flex: 1;
             overflow: hidden;
-            margin-top: 10%; /* 避免與 Header 重疊 */
+            margin-top: 10%;
         }
 
         .top-section {
@@ -107,56 +130,40 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             padding: 5%;
             text-align: center;
         }
 
-        .top-section h1 {
-            font-size: 400%; /* 使用百分比 */
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .top-section span {
-            font-size: 100%;
-            color: #888;
-            letter-spacing: 2px;
+        .top-section .subtitle {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #666;
+            letter-spacing: 0.15rem;
+            margin-bottom: 0.5rem;
         }
 
         .bottom-section {
             flex: 2;
-            background-color: #f5f5f5;
+            background-color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             padding: 5%;
             position: relative;
         }
 
-        .bottom-section .text-box {
-            display: flex;
-            align-items: flex-start;
-            margin: 2% 0;
-        }
-
-        .bottom-section .text-box::before {
-            content: "";
-            width: 1%;
-            height: 100%;
-            background-color: #000000;
-            margin-right: 2%;
-        }
-
-        .bottom-section .text-box h2 {
-            font-size: 150%; /* 使用百分比 */
-            font-weight: bold;
-            margin: 0 0 1%;
-        }
-
-        .bottom-section .text-box p {
-            font-size: 100%; /* 使用百分比 */
-            color: #555;
-            margin: 0;
+        .quote-type {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #444;
+            max-width: 600px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 0.1em solid #000;
         }
     </style>
 </head>
@@ -167,29 +174,17 @@
     <nav class="menu" id="menu">
         <button class="close-btn" onclick="toggleMenu()">×</button>
         <a href="index.html">Home</a>
-        <a href="newarticle.html">Article</a>
         <a href="new_artwork.html">Artwork</a>
         <a href="aboutme.html">About Me</a>
     </nav>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
     <main class="main-content">
         <section class="top-section">
-            <span>PRESENTATION TEMPLATE</span>
+            <div class="subtitle">Founder & Curator</div>
             <h1>James</h1>
         </section>
         <section class="bottom-section">
-            <div class="text-box">
-                <div>
-                    <h2>Simple Text Here</h2>
-                    <p>Lorem ipsum dolor sit</p>
-                </div>
-            </div>
-            <div class="text-box">
-                <div>
-                    <h2>Text Here</h2>
-                    <p>Lorem ipsum dolor sit amet</p>
-                </div>
-            </div>
+            <div class="quote-type" id="quote"></div>
             <div class="black-corner"></div>
         </section>
     </main>
@@ -200,6 +195,62 @@
             const isOpen = menu.classList.toggle("open");
             overlay.classList.toggle("show", isOpen);
         }
+
+        const quotes = [
+            "Being different is not just a choice, it’s a responsibility.",
+            "People of taste always find each other.",
+            "Style is a way to say who you are without speaking.",
+            "Elegance is when the inside is as beautiful as the outside.",
+            "Luxury lies in each detail.",
+            "Style is eternal.",
+            "You don’t find elegance. You create it.",
+            "Grace, not glamour.",
+            "Because timelessness never fades.",
+            "Every creation begins with silence.",
+            "Crafted not just to be seen, but to be felt.",
+            "What you wear should speak when you don't.",
+            "Subtlety is the loudest language.",
+            "Imperfect is a form of perfection.",
+            "Time is the ultimate luxury.",
+            "Simplicity is the purest sophistication.",
+            "Form follows feeling.",
+            "Quiet speaks louder.",
+            "In stillness, style breathes.",
+            "Not everything has to shout to be heard.",
+            "Less. But better.",
+            "Confidence is the finest thing you can wear.",
+            "She doesn’t follow trends. She defines them.",
+            "You are not made to fit in.",
+            "Power is personal.",
+            "Own the room—without a word.",
+            "Luxury is a lifestyle, not a label."
+        ];
+
+        let quoteIndex = 0;
+        let charIndex = 0;
+        const quoteEl = document.getElementById("quote");
+
+        function typeQuote() {
+            if (charIndex < quotes[quoteIndex].length) {
+                quoteEl.textContent += quotes[quoteIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeQuote, 60);
+            } else {
+                setTimeout(() => {
+                    quoteEl.textContent = "";
+                    charIndex = 0;
+                    if (quoteIndex === 0) {
+                        const rest = quotes.slice(1);
+                        quoteIndex = Math.floor(Math.random() * rest.length) + 1;
+                    } else {
+                        quoteIndex = Math.floor(Math.random() * quotes.length);
+                    }
+                    typeQuote();
+                }, 3000);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', typeQuote);
     </script>
 </body>
 </html>
