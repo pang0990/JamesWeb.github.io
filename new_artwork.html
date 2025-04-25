@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Artwork</title>
+    <title>James Art Galerie | Devision 視覺藝術展覽</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -25,52 +26,48 @@
             box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* Logo Section */
         .logo-section {
             margin-bottom: 20px;
             position: relative;
         }
 
         .logo-section .logo {
-            font-size: 24px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
             font-weight: bold;
             margin: 0;
+            letter-spacing: 2px;
         }
 
         .logo-section .subtitle {
-            font-size: 18px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            text-transform: uppercase;
             color: #c0c0c0;
             letter-spacing: 2px;
             margin: 5px 0;
         }
 
-        /* Navigation Section */
         .navigation {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-bottom: 20px;
             text-transform: uppercase;
             font-size: 12px;
+            gap: 20px;
         }
 
-        .navigation div {
-            flex: 1;
-            text-align: center;
-            position: relative;
+        .navigation a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 5px;
+            transition: color 0.3s;
         }
 
-        .navigation div::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 1px;
-            width: 60%;
-            background-color: #ffffff;
+        .navigation a:hover {
+            color: #a9a9a9;
         }
 
-        /* Image Section */
         .image-section {
             background-color: #ffffff;
             color: #000000;
@@ -92,7 +89,6 @@
             margin-top: 5px;
         }
 
-        /* Description Section */
         .description {
             display: flex;
             justify-content: space-between;
@@ -118,44 +114,29 @@
             transition: color 0.3s;
         }
 
-        /* Individual hover colors */
         .description .column a[href="/CHAMELEON-823.html"]:hover {
-            color: #ff69b4; /* 粉色 */
+            color: #ff69b4;
         }
 
         .description .column a[href="/BED ROOM-918.html"]:hover {
-            color: #c3b091; /* 卡其色 */
+            color: #c3b091;
         }
 
         .description .column a[href="/BATH ROOM-1002.html"]:hover {
-            color: #800080; /* 紫色 */
+            color: #800080;
         }
 
         .description .column a[href="/LIVING ROOM-1110.html"]:hover {
-            color: #013220; /* 墨綠色 */
+            color: #013220;
         }
 
         .description .column p {
             margin: 5px 0;
         }
 
-        /* Barcode Section */
-        .barcode-section {
-            margin: 20px 0;
-            padding: 10px;
-            border: 1px dashed #ffffff;
-        }
-
-        .barcode-section img {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-        }
-
-        /* Footer Section */
         .footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 20px;
             font-size: 12px;
             border-top: 1px dashed #ffffff;
@@ -166,74 +147,75 @@
             color: #ffffff;
             text-decoration: none;
             transition: color 0.3s;
+            margin: 0 10px;
         }
 
         .footer a:hover {
-            color: #a9a9a9; /* 懸停時變為淡灰色 */
+            color: #a9a9a9;
         }
 
-        /* Dashed Separator */
         hr {
             border: 0;
             border-top: 1px dashed #ffffff;
             margin: 20px 0;
         }
+
+        @media (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .description {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+    }
+
+    body {
+        display: block;
+    }
+}
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Logo Section -->
-        <div class="logo-section">
-            <h1 class="logo">DEVISION® JAMES ART GALERIE</h1>
-            <div class="subtitle">視覺畫廊</div>
-        </div>
-
-        <!-- Navigation Section -->
-        <div class="navigation">
-            <div>ART GALLERY</div>
-            <div>INSIDE VIEW</div>
-            <div>EXHIBITION SPACE</div>
-        </div>
-
-        <hr>
-
-        <!-- Image Section -->
         <div class="image-section">
             <div class="logo">DEVISION® JAMES ART GALERIE</div>
             <div class="subtitle">視覺畫廊</div>
         </div>
 
-        <!-- Description Section -->
+        <div class="logo-section">
+            <h1 class="logo">DEVISION® JAMES ART GALERIE</h1>
+            <div class="subtitle">視覺畫廊</div>
+        </div>
+
         <div class="description">
             <div class="column">
                 <h3>DESCRIPTION</h3>
-                <p><a href="CHAMELEON-823.html" title="View details about CHAMELEON-823">CHAMELEON-823</a></p>
-                <p><a href="BED ROOM-918.html" title="View details about BED ROOM-918">BED ROOM-918</a></p>
-                <p><a href="BATH ROOM-1002.html" title="View details about BATH ROOM-1002">BATH ROOM-1002</a></p>
-                <p><a href="LIVING ROOM-1110.html" title="View details about LIVING ROOM-1110">LIVING ROOM-1110</a></p>
+                <p><a href="fulllove.html">A House Full Of Love</a></p>
+                <p><a href="aboutwork.html">About Work</a></p>
             </div>
             <div class="column">
                 <h3>AMOUNT</h3>
-                <p>908</p>
-                <p>1001</p>
-                <p>1101</p>
-                <p>9999</p>
+                <p>1</p>
+                <p>4</p>
             </div>
         </div>
 
         <hr>
 
-        <!-- Barcode Section -->
-        <div class="barcode-section">
-            <img src="https://via.placeholder.com/300x80" alt="Barcode">
-        </div>
-
-        <!-- Footer Section -->
-        <div class="footer">
-            <div><a href="index.html" title="Back to homepage">view all</a></div>
-            <div><a href="index.html" title="Back to homepage">home</a></div>
-            <div>14/06/2024</div>
-        </div>
+        <div class="footer" style="justify-content: space-between;">
+    <a href="index.html">home</a>
+    <span>14/06/2024</span>
+</div>
     </div>
 </body>
 </html>
