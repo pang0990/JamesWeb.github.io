@@ -195,6 +195,11 @@
           });
 
           overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) {
+              overlay.classList.remove("active");
+              return;
+            }
+
             const clickX = e.clientX;
             const screenWidth = window.innerWidth;
 
