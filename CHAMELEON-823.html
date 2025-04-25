@@ -152,18 +152,6 @@
       margin-top: 30px;
     }
 
-    .lightbox-overlay .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 24px;
-      color: #ffffff;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 10000;
-    }
-
     .lightbox-overlay.active {
       display: flex;
     }
@@ -186,11 +174,6 @@
           progress.className = "progress-bar";
           overlay.appendChild(progress);
 
-          const closeBtn = document.createElement("button");
-          closeBtn.innerHTML = "&times;";
-          closeBtn.className = "close-btn";
-          overlay.appendChild(closeBtn);
-
           const img = document.createElement("img");
           overlay.appendChild(img);
 
@@ -211,17 +194,17 @@
             });
           });
 
-          closeBtn.addEventListener("click", () => {
-            overlay.classList.remove("active");
-          });
-
           overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) {
-              overlay.classList.remove("active");
+            const clickX = e.clientX;
+            const screenWidth = window.innerWidth;
+
+            if (clickX < screenWidth / 2) {
+              currentIndex = (currentIndex - 1 + images.length) % images.length;
             } else {
               currentIndex = (currentIndex + 1) % images.length;
-              showImage(currentIndex);
             }
+
+            showImage(currentIndex);
           });
         });
       });
