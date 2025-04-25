@@ -412,7 +412,7 @@ images.forEach((img, i) => {
         newImg.style.height = 'auto';
 
         const infoToggle = document.createElement('button');
-        infoToggle.innerHTML = '✧ Show Info';
+        infoToggle.innerHTML = '+ Show Info';
         infoToggle.style.display = 'block';
         infoToggle.style.marginTop = '12px';
         infoToggle.style.background = 'transparent';
@@ -440,7 +440,7 @@ images.forEach((img, i) => {
         textBox.style.lineHeight = '1.9';
         textBox.style.lineHeight = '1.8';
         textBox.style.fontFamily = 'Georgia, serif';
-        textBox.innerHTML = `<h3 style='margin-top:0; font-size:1.1rem; font-weight:bold;'>${artwork.title}</h3><p style='margin: 12px 0 0;'>${artwork.content}</p>`;
+        textBox.innerHTML = `<h3 style='margin-top:0; font-size:1.1rem; font-weight:bold;'>${artwork.title}</h3><p style='margin: 12px 0 0;'>${artwork.content.en}</p><p style='margin: 12px 0 0;'>${artwork.content.zh}</p>`;
 
         infoToggle.addEventListener('click', () => {
   const showing = textBox.style.display === 'block';
@@ -449,7 +449,7 @@ images.forEach((img, i) => {
 
   if (!showing) {
     const closeBtn = document.createElement('button');
-    closeBtn.innerHTML = '✦ Hide Info';
+    closeBtn.innerHTML = '- Hide Info';
     closeBtn.style.display = 'block';
     closeBtn.style.marginTop = '12px';
     closeBtn.style.background = 'transparent';
