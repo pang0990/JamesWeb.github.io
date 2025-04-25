@@ -89,11 +89,28 @@
             border-top: 1px dashed #ffffff;
             margin-top: 40px;
             padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
             ul li a {
                 font-size: 18px;
+            }
+            .footer {
+                flex-direction: column;
+                gap: 5px;
             }
         }
     </style>
@@ -114,7 +131,8 @@
         </ul>
 
         <div class="footer">
-            &copy; 2024 James Art Galerie
+            <a href="new_artwork.html">&#8592; Back to Gallery</a>
+            <span>&copy; 2024 James Art Galerie</span>
         </div>
     </div>
 </body>
