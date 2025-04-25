@@ -37,9 +37,10 @@
       font-size: 1.8rem;
     }
     .brand-title {
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      font-size: 0.95rem;
+      font-family: 'Georgia', serif;
+      text-transform: none;
+      letter-spacing: 0.3px;
     }
     header nav a {
       margin-left: 20px;
@@ -96,14 +97,16 @@
     }
     .modal-inner {
       background: #f6f3ee;
-      width: 1000px;
-      height: 90vh;
+      max-width: 1000px;
+      max-height: 90vh;
       padding: 40px;
       position: relative;
       display: flex;
       flex-direction: column;
       gap: 20px;
       overflow-y: auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
     }
     #modal-close {
   position: absolute;
@@ -125,11 +128,12 @@
     .modal-text {
       flex: 1;
       color: #000;
-      font-size: 1rem;
+      font-size: 0.95rem;
       white-space: pre-line;
-      line-height: 1.8;
+      line-height: 1.6;
       font-family: 'Georgia', serif;
       letter-spacing: 0.2px;
+      padding: 0 12px;
       overflow-y: auto;
       max-height: 100%;
     }
@@ -206,15 +210,14 @@
       <div class="brand-signature">James</div>
       <div class="brand-title">A House Full Of Love</div>
     </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <nav></nav>
   </header>
 
   <section class="poster-section">
     <img src="your-main-poster.jpg" alt="Main Poster" />
+    <p style="text-align:center; font-family:'Georgia', serif; font-style:italic; margin-top:-60px; color:#444;">
+      “This house was built with silence, and everything I never said.”
+    </p>
   </section>
 
   <section id="gallery" class="gallery-section">
@@ -225,12 +228,13 @@
   </section>
 
   <footer class="footer">
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
-    <p>"Art enables us to find ourselves and lose ourselves at the same time."</p>
+    <p>&copy; 2025 James. All rights reserved.</p>
+    <p>“Some loves are never loud. But they’re everywhere.”</p>
   </footer>
 
   <div id="modal">
     <div class="modal-inner">
+      <button id="toggle-lang" style="position:absolute; top:10px; right:60px; z-index:1001; font-size: 0.9rem; background:none; border:none; cursor:pointer; color:#000;">EN</button>
       <span id="modal-close">&times;</span>
       <div class="modal-content-wrapper">
         <div class="modal-text">
@@ -254,15 +258,15 @@
     const artworks = [
   {
     title: 'The Last Day of the World',
-    content: `那天，世界彷彿走到了盡頭。
+    content: {
+      zh: `那天，世界彷彿走到了盡頭。
 電視還在搜尋訊號，一切已燃燒成一朵蘑菇雲。
 但我們躺在床上，什麼也沒說，纏綿著對方，彷彿一切與我們無關。
 
 那一刻我忽然明白，
 如果結局真的來了，
-只要你在我身邊，就夠了。
-
-That day, the world felt like it had come to an end.
+只要你在我身邊，就夠了。`,
+      en: `That day, the world felt like it had come to an end.
 The TV still searched for signal,
 while everything outside had already bloomed into a mushroom cloud.
 But we lay in bed, saying nothing,
@@ -272,10 +276,12 @@ as if none of it had anything to do with us.
 In that moment, I understood:
 if the end truly comes,
 having you beside me is enough.`
+    }
   },
   {
     title: 'Love Don’t Be Shy',
-    content: `當我們浸在滿是泡泡的浴缸裡，
+    content: {
+      zh: `當我們浸在滿是泡泡的浴缸裡，
 彷彿整個宇宙都悄悄被邀請了進來，
 靜靜地圍繞在我們身邊。
 
@@ -287,9 +293,8 @@ having you beside me is enough.`
 總能不經意地完成彼此。
 
 它沒有承諾「永遠」，
-卻從沒離開過。
-
-As we sank into the bubbles,
+卻從沒離開過。`,
+      en: `As we sank into the bubbles,
 it felt like the whole universe had quietly gathered around us,
 watching without a word.
 
@@ -304,10 +309,12 @@ without ever trying.
 You never said "forever."
 But somehow,
 you never left.`
+    }
   },
   {
     title: 'A Late-Night Conversation',
-    content: `我不知道從什麼時候開始，
+    content: {
+      zh: `我不知道從什麼時候開始，
 我們的日子變得像電影一樣。
 
 不是因為情節有多戲劇化，
@@ -322,9 +329,8 @@ you never left.`
 也是我每天都會重播的那一段。
 
 也許我們真的在不說出口的時候，
-早就愛得很深了。
-
-I don’t know when it started,
+早就愛得很深了。`,
+      en: `I don’t know when it started,
 but somehow our days began to feel like a film.
 
 Not because the story was dramatic,
@@ -340,16 +346,18 @@ the one I play back again and again.
 
 Maybe we really did fall in love,
 long before we ever said a word about it.`
+    }
   },
   {
     title: 'Beyond This World',
-    content: `請永遠記得，在你感到幸福的每一刻，
-那都是我，默默為你對齊過的宇宙。
-
-Please always remember—every time you felt truly happy,
+    content: {
+      zh: `請永遠記得，在你感到幸福的每一刻，
+那都是我，默默為你對齊過的宇宙。`,
+      en: `Please always remember—every time you felt truly happy,
 it was the universe I quietly aligned for you.`
+    }
   }
-];;
+]
 
     const images = document.querySelectorAll('#gallery img');
 images.forEach((img, i) => {
@@ -360,13 +368,25 @@ images.forEach((img, i) => {
       const artwork = artworks[index];
       if (artwork) {
         titleEl.innerText = artwork.title;
-        contentEl.innerText = artwork.content;
+        contentEl.innerText = artwork.content.en;
         imgEl.src = img.src;
         modal.style.display = 'flex';
       }
     });
   }
 })
+    let currentLang = 'en';
+    const toggleBtn = document.getElementById('toggle-lang');
+    toggleBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'zh' ? 'en' : 'zh';
+      toggleBtn.innerText = currentLang === 'zh' ? 'EN' : '中文';
+      const currentIndex = Array.from(document.querySelectorAll('#gallery img')).findIndex(img => img.src === imgEl.src);
+      if (artworks[currentIndex]) {
+        contentEl.style.minHeight = contentEl.offsetHeight + 'px';
+      contentEl.innerText = artworks[currentIndex].content[currentLang];
+      }
+    });
+
     closeBtn.addEventListener('click', () => {
       modal.style.display = 'none';
     });
@@ -392,7 +412,7 @@ images.forEach((img, i) => {
         newImg.style.height = 'auto';
 
         const infoToggle = document.createElement('button');
-        infoToggle.innerHTML = '+ Show Info';
+        infoToggle.innerHTML = '✧ Show Info';
         infoToggle.style.display = 'block';
         infoToggle.style.marginTop = '12px';
         infoToggle.style.background = 'transparent';
@@ -415,7 +435,9 @@ images.forEach((img, i) => {
         textBox.style.marginTop = '10px';
         textBox.style.whiteSpace = 'pre-line';
         textBox.style.borderTop = '1px solid #ccc';
-        textBox.style.fontSize = '0.95rem';
+        textBox.style.fontSize = '1rem';
+        textBox.style.paddingRight = '8px';
+        textBox.style.lineHeight = '1.9';
         textBox.style.lineHeight = '1.8';
         textBox.style.fontFamily = 'Georgia, serif';
         textBox.innerHTML = `<h3 style='margin-top:0; font-size:1.1rem; font-weight:bold;'>${artwork.title}</h3><p style='margin: 12px 0 0;'>${artwork.content}</p>`;
@@ -427,7 +449,7 @@ images.forEach((img, i) => {
 
   if (!showing) {
     const closeBtn = document.createElement('button');
-    closeBtn.innerHTML = '- Less Info';
+    closeBtn.innerHTML = '✦ Hide Info';
     closeBtn.style.display = 'block';
     closeBtn.style.marginTop = '12px';
     closeBtn.style.background = 'transparent';
