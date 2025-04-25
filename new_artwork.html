@@ -154,17 +154,18 @@
             }
 
             .description {
+                flex-wrap: nowrap;
                 flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
+                justify-content: space-between;
                 gap: 20px;
-                text-align: center;
+                text-align: left;
             }
 
             .description .column {
-                text-align: center;
-                flex: 1 1 100%;
-                max-width: 300px;
+                flex: 1;
+                max-width: 50%;
+                min-width: auto;
+                text-align: left;
             }
 
             .footer {
