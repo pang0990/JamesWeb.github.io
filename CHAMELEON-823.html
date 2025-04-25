@@ -137,7 +137,7 @@
 
     .lightbox-overlay img {
       max-width: 90vw;
-      max-height: 90vh;
+      max-height: 80vh;
       object-fit: contain;
     }
 
@@ -150,6 +150,35 @@
       background: transparent;
       border: none;
       cursor: pointer;
+    }
+
+    .lightbox-overlay .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: #ffffff;
+      width: 0;
+      transition: width 0.3s;
+    }
+
+    .lightbox-overlay .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 32px;
+      cursor: pointer;
+    }
+
+    .lightbox-overlay .prev {
+      left: 20px;
+    }
+
+    .lightbox-overlay .next {
+      right: 20px;
     }
 
     .lightbox-overlay.active {
@@ -167,6 +196,10 @@
         const overlay = document.createElement("div");
         overlay.classList.add("lightbox-overlay");
 
+        const progress = document.createElement("div");
+        progress.className = "progress-bar";
+        overlay.appendChild(progress);
+
         const img = document.createElement("img");
         overlay.appendChild(img);
 
@@ -175,14 +208,25 @@
         closeBtn.className = "close-btn";
         overlay.appendChild(closeBtn);
 
+        const prevBtn = document.createElement("button");
+        prevBtn.innerHTML = "&larr;";
+        prevBtn.className = "nav-button prev";
+        overlay.appendChild(prevBtn);
+
+        const nextBtn = document.createElement("button");
+        nextBtn.innerHTML = "&rarr;";
+        nextBtn.className = "nav-button next";
+        overlay.appendChild(nextBtn);
+
         document.body.appendChild(overlay);
 
         let currentIndex = 0;
 
         const showImage = (index) => {
-          img.src = galleryImages[index].src;
+          currentIndex = (index + galleryImages.length) % galleryImages.length;
+          img.src = galleryImages[currentIndex].src;
           overlay.classList.add("active");
-          currentIndex = index;
+          progress.style.width = ((currentIndex + 1) / galleryImages.length) * 100 + "%";
         };
 
         galleryImages.forEach((image, index) => {
@@ -191,12 +235,23 @@
           });
         });
 
+        closeBtn.addEventListener("click", () => {
+          overlay.classList.remove("active");
+        });
+
+        prevBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showImage(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showImage(currentIndex + 1);
+        });
+
         overlay.addEventListener("click", (e) => {
-          if (e.target === overlay || e.target === closeBtn) {
+          if (e.target === overlay) {
             overlay.classList.remove("active");
-          } else {
-            currentIndex = (currentIndex + 1) % galleryImages.length;
-            showImage(currentIndex);
           }
         });
       });
