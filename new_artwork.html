@@ -26,6 +26,27 @@
             box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
         }
 
+        .image-section {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-section .logo {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .image-section .subtitle {
+            font-size: 16px;
+            color: #666666;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
         .logo-section {
             margin-bottom: 20px;
             position: relative;
@@ -68,31 +89,11 @@
             color: #a9a9a9;
         }
 
-        .image-section {
-            background-color: #ffffff;
-            color: #000000;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .image-section .logo {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .image-section .subtitle {
-            font-size: 16px;
-            color: #666666;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-
         .description {
             display: flex;
             justify-content: space-between;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
 
         .description .column {
@@ -100,6 +101,8 @@
             text-align: left;
             font-size: 14px;
             line-height: 1.5;
+            min-width: 250px;
+            margin-bottom: 20px;
         }
 
         .description .column h3 {
@@ -114,29 +117,13 @@
             transition: color 0.3s;
         }
 
-        .description .column a[href="/CHAMELEON-823.html"]:hover {
-            color: #ff69b4;
-        }
-
-        .description .column a[href="/BED ROOM-918.html"]:hover {
-            color: #c3b091;
-        }
-
-        .description .column a[href="/BATH ROOM-1002.html"]:hover {
-            color: #800080;
-        }
-
-        .description .column a[href="/LIVING ROOM-1110.html"]:hover {
-            color: #013220;
-        }
-
         .description .column p {
             margin: 5px 0;
         }
 
         .footer {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             margin-top: 20px;
             font-size: 12px;
             border-top: 1px dashed #ffffff;
@@ -161,39 +148,47 @@
         }
 
         @media (max-width: 768px) {
-    .navigation {
-        flex-direction: column;
-        gap: 10px;
-    }
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
 
-    .description {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
+            .description {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+                text-align: center;
+            }
 
-    .footer {
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-        font-size: 14px;
-    }
+            .description .column {
+                text-align: center;
+                flex: 1 1 100%;
+                max-width: 300px;
+            }
 
-    body {
-        display: block;
-    }
-}
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                font-size: 14px;
+            }
+
+            body {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="image-section">
-            <div class="logo">DEVISION® JAMES ART GALERIE</div>
+        <div class="logo-section">
+            <h1 class="logo">DEVISION® JAMES ART GALERIE</h1>
             <div class="subtitle">視覺畫廊</div>
         </div>
 
-        <div class="logo-section">
-            <h1 class="logo">DEVISION® JAMES ART GALERIE</h1>
+        <div class="image-section">
+            <div class="logo">DEVISION® JAMES ART GALERIE</div>
             <div class="subtitle">視覺畫廊</div>
         </div>
 
@@ -212,10 +207,10 @@
 
         <hr>
 
-        <div class="footer" style="justify-content: space-between;">
-    <a href="index.html">home</a>
-    <span>14/06/2024</span>
-</div>
+        <div class="footer">
+            <a href="index.html">home</a>
+            <span>2024 James Art Galerie</span>
+        </div>
     </div>
 </body>
 </html>
