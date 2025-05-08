@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Other Side of the Story</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    
+    :root {
+      --bg-main: #f5f0e6;
+      --fg-main: #333333;
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --border-light: #ddd5c5;
+      --shadow-light: 0 4px 10px rgba(0,0,0,0.05);
+      --font-serif: 'Playfair Display', serif;
+      --font-script: 'Great Vibes', cursive;
+      --radius-base: 10px;
+    }
+
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-serif);
+      background-color: var(--bg-main);
+      color: var(--fg-main);
+      overflow-x: auto;
+      overflow-y: hidden;
+      height: 100vh;
+      width: 100vw;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    body::-webkit-scrollbar { display: none; }
+
+    h1 {
+      font-family: var(--font-script);
+      font-size: clamp(2rem, 4vw + 1rem, 3.2rem);
+      margin-bottom: 10px;
+    }
+
+    .intro,
+    .question-section,
+    .result-section,
+    .story-section {
+      max-width: 800px;
+      margin: 10px auto;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-base);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-light);
+      font-size: 1.1em;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    .question { font-size: 1.25em; margin: 12px 0; }
+
+    textarea {
+      width: 90%;
+      min-height: 80px;
+      padding: 12px 14px;
+      font-size: 0.95em;
+      font-family: inherit;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,0.15);
+      margin-bottom: 12px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #ececec;
+      color: #111;
+      font-size: 1em;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+    button:hover { background-color: #dcdcdc; }
+
+    .result {
+      background-image: url('/articleimg/background01.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 28px 20px;
+      margin-top: 18px;
+      border-radius: 12px;
+      font-size: 1em;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      text-align: center;
+      color: var(--fg-main);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .story-section,
+    .question-section,
+    .result-section,
+    .intro {
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(24px);} 100% { opacity: 1; transform: translateY(0);} }
+
+
+    .horizontal-wrapper {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      height: 100vh;
+      width: 100vw;
+      scrollbar-width: none;
+    }
+    .horizontal-wrapper::-webkit-scrollbar { display: none; }
+
+    .page {
+      flex: none;
+      width: 50vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      padding: 40px 32px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--bg-main);
+      border-right: 1px solid #e0dcd5;
+      position: relative;
+    }
+
+    .content-box {
+      background-color: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 32px 28px;
+      max-width: 600px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .page img.cover { max-width: 60%; margin: 0 auto 24px; display:block; border:1px solid #ccc; border-radius:8px; }
+
+    .page h2 { font-size: 2rem; margin-bottom: 20px; }
+
+    .chapter-label {
+      font-size: 0.9em;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      padding-bottom: 6px;
+    }
+    .page-counter {
+      position: fixed; bottom: 20px; right: 28px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 10px; padding: 6px 14px;
+      font-size: 0.9em; color: #555; font-family: var(--font-serif);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      z-index: 1000;
+    }
+
+    #click-overlay::before {
+      content:""; position:absolute; left:50%; top:0; width:1px; height:100%; background:rgba(0,0,0,0.04); z-index:1; }
+    #click-left, #click-right { position:fixed; top:100px; width:30px; height:calc(100% - 140px); z-index:600; }
+
+    @media (max-width: 768px) {
+      html { font-size: 15px; }
+      body { overflow-y: auto; overflow-x: hidden; }
+
+      .horizontal-wrapper {
+        flex-direction: column;
+        height: auto;
+        scroll-snap-type: none;
+        width: 100%;
+      }
+
+      .page {
+        width: 100%;
+        height: auto;
+        align-items: flex-start;
+        border-right: none;
+        border-bottom: 1px solid #e0dcd5;
+        padding: 56px 20px;
+      }
+
+      .content-box {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 24px 18px;
+        margin: 0 auto;
+      }
+
+      .page img.cover { max-width: 92%; margin-bottom: 20px; }
+      .page h2 { font-size: 1.75rem; }
+
+      .intro,
+      .question-section,
+      .result-section,
+      .story-section {
+        margin: 8px 12px;
+        padding: 18px 20px;
+        font-size: 1em;
+      }
+
+      textarea { width: 100%; font-size: 1em; }
+      button { width: 100%; padding: 12px 0; }
+      .question { font-size: 1.15em; }
+      .chapter-label { font-size: 0.95em; }
+
+      #click-overlay,
+      .page-counter,
+      div[style*="position: fixed"] { display: none; }
+    }
+    @media (max-width: 480px) {
+      html { font-size: 14px; }
+      .page { padding: 48px 16px; }
+      .page h2 { font-size: 1.5rem; }
+      button { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+  <div style="position: fixed; top: 20px; left: 30px; display: flex; align-items: baseline; gap: 16px; z-index: 1000;">
+    <span style="font-family: 'Great Vibes', cursive; font-size: 2em; color: #111111;">James</span>
+    <span style="font-family: 'Playfair Display', serif; font-size: 1.2em; color: #111111;">The Other Side Of Story</span>
+  </div>
+
+  <div class="horizontal-wrapper">
+    <div class="page">
+      <div class="content-box" style="text-align: center;">
+        <img src="cover.jpg" class="cover" alt="封面">
+        <h2>A House Full Of Love</h2>
+      </div>
+    </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">前言</div>
+      <p>你曾經遇過一個人，<br>那個人像是你的另一個靈魂嗎？</p>
+      <p>也許不需要言語，也許連承諾都不重要。</p>
+      <p>只是每一個呼吸，每一個回眸，<br>都在訴說一件事——</p>
+      <p><strong>「有些愛，不必說出口，因為它從來沒有離開過。」</strong></p>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">Chapter 1</div>
+      <img src="/mnt/data/494356998_1777879992768678_6464279401360514393_n.jpg" alt="第一幕插畫" style="width:100%; border-radius: 8px; margin-bottom: 20px;" />
+      <p>我一直不喜歡這類問題。因為這個問題的背後，是一個不被了解的我。</p>
+      <p>但有一天，一個我原本不想了解的人，靜靜地站在我的天地裡。</p>
+      <p>她說話笑笑的，看似不在意我的冷漠，但就是那麼溫柔地把我的距離一點點抵鋼。</p>
+      <p>「我不知道是什麼時候開始的，我們好像第一次聊天就是聊自己的人生。」</p>
+      <p>原本沒有專屬想要認識誰的我，終於在有一個人面前，從「不必要說」變成「我想讓你知道」。</p>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">互動區 1</div>
+      <div class="question">
+        如果是你，<br>
+        你會因為怎樣的一句話，願意向某人敞開心房？
+      </div>
+      <textarea id="userAnswer1" placeholder="寫下你的答案..."></textarea>
+      <button onclick="generateStory1()">生成我的故事</button>
+      <div class="result" id="output1" style="display: none;"></div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">互動區 2</div>
+      <div class="question">
+        你記得某個很小很小、卻讓你忽然意識到「我真的很愛她／他」的瞬間嗎？<br>
+        不一定是多麼浪漫的事，也許只是她看你一眼、或陪你吃了一頓飯。
+      </div>
+      <textarea id="userMoment2" placeholder="寫下那個瞬間..."></textarea>
+      <button onclick="generateStory2()">寫下我的第二段故事</button>
+      <div class="result" id="output2" style="display: none;"></div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">Chapter 3</div>
+      <p>雖然她讓我抑鬱的原因，比星星還要多，</p>
+      <p>但這份愛，卻像太陽一樣燦爛。</p>
+      <p>太陽一出現，星星便悄悄隱去。</p>
+      <p>愛是包容缺點，</p>
+      <p>更是深深熱愛著她所有的光。</p>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">互動區 3</div>
+      <div class="question">
+        當你開始接納一個人的缺點時，<br>
+        是不是也意味著你準備好去愛她的一切了？<br>
+        有沒有某個缺點，是你從討厭到後來覺得「就是她的樣子」？
+      </div>
+      <textarea id="userFlaw3" placeholder="寫下那個讓你改變的缺點..."></textarea>
+      <button onclick="generateStory3()">寫下我的第三段故事</button>
+      <div class="result" id="output3" style="display: none;"></div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">Chapter 4</div>
+      <p>我真的會愛上我們擁有的每一刻。</p>
+      <p>從早到晚，</p>
+      <p>只想和她膩在一起。</p>
+      <p>一起纏綿賴床，</p>
+      <p>一起刷牙、煮早餐，</p>
+      <p>出門逛街、運動、吃晚餐，</p>
+      <p>然後去酒吧喝兩杯，</p>
+      <p>帶著醉意回家，</p>
+      <p>在家裡的每個角落擁抱彼此，</p>
+      <p>直到在彼此的懷裡沉沉睡去。</p>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">互動區 4</div>
+      <div class="question">
+        如果你有一天真的和她／他一起生活，<br>
+        你最想做的一件小事會是什麼？<br>
+        很簡單，卻會讓你覺得：「有她／他在，真好。」
+      </div>
+      <textarea id="userSimpleThing4" placeholder="寫下那件小事..."></textarea>
+      <button onclick="generateStory4()">寫下我的第四段故事</button>
+      <div class="result" id="output4" style="display: none;"></div>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">Chapter 5</div>
+      <p>怎麼會不想要一輩子都膩在她身邊呢？</p>
+      <p>只要太陽升起，誰還會在意那些星星呢？</p>
+      <p>真正的愛，</p>
+      <p>是包容所有缺點，</p>
+      <p>然後在所有優點裡，愛得更加無可救藥。</p>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">互動區 5</div>
+      <div class="question">
+        在你心中，愛最真實的樣子是什麼？<br>
+        是不是某個平凡片刻，讓你相信「我想和她／他一直在一起」？
+      </div>
+      <textarea id="userTrueLove5" placeholder="寫下那個讓你相信愛的畫面..."></textarea>
+      <button onclick="generateStory5()">寫下我的第五段故事</button>
+      <div class="result" id="output5" style="display: none;"></div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">你的完整故事</div>
+      <button onclick="showFullStory()">點我回顧你寫下的每一段</button>
+      <div class="result" id="finalStory" style="display: none;"></div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="content-box">
+      <div class="chapter-label">故事共鳴牆</div>
+      <p>這些故事是其他觀眾匿名分享的片段，也許你會從中看到一些熟悉的心情。</p>
+      <div class="result" id="sharedStories">
+        <p>「她就像夜裡的微光，總是在我快要崩潰時，讓我安靜下來。」</p>
+        <p>「我記得她坐在便利商店外喝熱湯，那一刻我忽然明白，我想一直陪著她。」</p>
+        <p>「她有很多缺點，但我卻一一學會了擁抱，因為那就是她的全部。」</p>
+        <p>「我最想做的事，就是和她一起買菜煮飯，這樣就很幸福了。」</p>
+        <p>「當我看到她疲憊卻還對我笑時，我知道，我這輩子都不會離開她。」</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</div>
+  <div style="position: fixed; top: 20px; left: 30px; display: flex; align-items: baseline; gap: 16px; z-index: 1000;">
+    <span style="font-family: 'Great Vibes', cursive; font-size: 2em; color: #111111;">James</span>
+    <span style="font-family: 'Playfair Display', serif; font-size: 1.2em; color: #111111;">The Other Side Of Story</span>
+  </div>
+  
+
+  <div class="page">
+  <div class="content-box" style="text-align: center;">
+    <h2></h2>
+  </div>
+</div>
+
+<div class="page">
+  <div class="content-box">
+    <p></p>
+    <p></p>
+    <p></p>
+  </div>
+</div>
+
+  <div class="page">
+  <div class="content-box"></div>
+</div>
+
+  <div class="page">
+  <div class="content-box"></div>
+</div>
+    <textarea id="userAnswer" placeholder="寫下你的答案..."></textarea>
+    <button onclick="generateStory()">生成我的故事</button>
+  </div>
+
+  <div class="page">
+  <div class="content-box"></div>
+</div>
+
+  <div class="question-section">
+    <div class="question">
+      你記得某個很小很小、卻讓你忽然意識到「我真的很愛她／他」的瞬間嗎？<br>
+      不一定是多麼浪漫的事，也許只是她看你一眼、或陪你吃了一頓飯。
+    </div>
+    <textarea id="userMoment" placeholder="寫下那個瞬間..."></textarea>
+    <button onclick="generateSecondStory()">寫下我的第二段故事</button>
+  </div>
+
+  <div class="result-section">
+    <div class="result" id="output2" style="display: none;"></div>
+  </div>
+
+  <div class="story-section">
+    <p>每次當我想遠離她的時候，</p>
+    <p>我的世界就開始悄悄地崩塌。</p>
+    <p>但每一次，當她再次把我找回來，</p>
+    <p>我的生活，又在無聲中獲得了救贖。</p>
+    <p>所以後來，我不再和自己過不去。</p>
+    <p>我承認了，她就是我生命中不可或缺的一部分。</p>
+    <p>因為她，我過得更好了。</p>
+  </div>
+
+  $1</p>
+
+  <div class="question-section">
+    <div class="question">
+      當你開始接納一個人的缺點時，
+      是不是也意味著你準備好去愛她的一切了？<br>
+      有沒有某個缺點，是你從討厭到後來覺得「就是她的樣子」？
+    </div>
+    <textarea id="userFlaw" placeholder="寫下那個讓你改變的缺點..."></textarea>
+    <button onclick="generateThirdStory()">寫下我的第三段故事</button>
+  </div>
+
+  <div class="result-section">
+    <div class="result" id="output3" style="display: none;"></div>
+  </div>
+    <p>但這份愛，卻像太陽一樣燦爛。</p>
+    <p>太陽一出現，星星便悄悄隱去。</p>
+    <p>愛是包容缺點，</p>
+    <p>更是深深熱愛著她所有的光。</p>
+  </div>
+
+  $1</p>
+
+  <div class="question-section">
+    <div class="question">
+      如果你有一天真的和她／他一起生活，<br>
+      你最想做的一件小事會是什麼？<br>
+      很簡單，卻會讓你覺得：「有她／他在，真好。」
+    </div>
+    <textarea id="userSimpleThing" placeholder="寫下那件小事..."></textarea>
+    <button onclick="generateFourthStory()">寫下我的第四段故事</button>
+  </div>
+
+  <div class="result-section">
+    <div class="result" id="output4" style="display: none;"></div>
+  </div>
+    <p>她的微笑，都是我幸福的瞬間。</p>
+    <p>每當和她一起討論未來的生活，</p>
+    <p>我都提醒自己要更努力，</p>
+    <p>去建造一個真正屬於我們的家。</p>
+  </div>
+
+  <div class="story-section">
+    <p>我真的會愛上我們擁有的每一刻。</p>
+    <p>從早到晚，</p>
+    <p>只想和她膩在一起。</p>
+    <p>一起纏綿賴床，</p>
+    <p>一起刷牙、煮早餐，</p>
+    <p>出門逛街、運動、吃晚餐，</p>
+    <p>然後去酒吧喝兩杯，</p>
+    <p>帶著醉意回家，</p>
+    <p>在家裡的每個角落擁抱彼此，</p>
+    <p>直到在彼此的懷裡沉沉睡去。</p>
+  </div>
+
+  </p>
+
+  <div class="question-section">
+    <div class="question">
+      在你心中，愛最真實的樣子是什麼？<br>
+      是不是某個平凡片刻，讓你相信「我想和她／他一直在一起」？
+    </div>
+    <textarea id="userTrueLove" placeholder="寫下那個讓你相信愛的畫面..."></textarea>
+    <button onclick="generateFifthStory()">寫下我的第五段故事</button>
+  </div>
+
+  <div class="result-section">
+    <div class="result" id="output5" style="display: none;"></div>
+  </div>
+    <p>怎麼會不想要一輩子都膩在她身邊呢？</p>
+    <p>只要太陽升起，誰還會在意那些星星呢？</p>
+    <p>真正的愛，</p>
+    <p>是包容所有缺點，</p>
+    <p>然後在所有優點裡，愛得更加無可救藥。</p>
+  </div>
+
+  <script>
+    function generateStory1() {
+      const input = document.getElementById("userAnswer1").value.trim();
+      const output = document.getElementById("output1");
+      output.innerHTML = input ? `<h2>你的故事</h2><p>有些人，就像${input}，</p><p>不靠近也能感覺到，不說話也能理解你。</p><p>這樣的人，一旦出現，就再也無法遺忘。</p>` : "請先寫下你的感受，再生成故事。";
+      output.style.display = "block";
+    }
+
+    function generateStory2() {
+      const input = document.getElementById("userMoment2").value.trim();
+      const output = document.getElementById("output2");
+      output.innerHTML = input ? `<h2>你的第二段故事</h2><p>那一刻，我忽然明白了，原來我真的很愛她／他。</p><p>${input}</p><p>就是那麼簡單的瞬間，卻成為我心裡最深的記憶。</p>` : "請寫下一個你記得的瞬間。";
+      output.style.display = "block";
+    }
+
+    function generateStory3() {
+      const input = document.getElementById("userFlaw3").value.trim();
+      const output = document.getElementById("output3");
+      output.innerHTML = input ? `<h2>你的第三段故事</h2><p>一開始我也不懂，甚至有點排斥。</p><p>但後來我明白了——${input}，</p><p>其實是她真實的一部分，也是我愛上她的方式之一。</p>` : "請寫下一個你曾經不懂的部分。";
+      output.style.display = "block";
+    }
+
+    function generateStory4() {
+      const input = document.getElementById("userSimpleThing4").value.trim();
+      const output = document.getElementById("output4");
+      output.innerHTML = input ? `<h2>你的第四段故事</h2><p>${input}</p><p>也許只是很平凡的事，但我知道，</p><p>只要是和她／他一起，日子就會變得特別。</p>` : "請寫下一件你想和她／他做的事。";
+      output.style.display = "block";
+    }
+
+    function generateStory5() {
+      const input = document.getElementById("userTrueLove5").value.trim();
+      const output = document.getElementById("output5");
+      output.innerHTML = input ? `<h2>你的第五段故事</h2><p>${input}</p><p>從那一刻開始，我知道，</p><p>這份愛，會一直在我心裡，永不離開。</p>` : "請寫下你相信愛的那個畫面。";
+      output.style.display = "block";
+    }
+
+    function showFullStory() {
+      const a = document.getElementById("userAnswer1").value.trim();
+      const b = document.getElementById("userMoment2").value.trim();
+      const c = document.getElementById("userFlaw3").value.trim();
+      const d = document.getElementById("userSimpleThing4").value.trim();
+      const e = document.getElementById("userTrueLove5").value.trim();
+      const output = document.getElementById("finalStory");
+
+      if (!a && !b && !c && !d && !e) {
+        output.innerHTML = "你還沒有寫下任何內容喔。回到上面每一段，寫一寫你的故事吧。";
+      } else {
+        output.innerHTML = `
+          <h3>這是你寫下的故事：</h3>
+          ${a ? `<p>有些人，就像${a}，不說話也能理解你。</p>` : ''}
+          ${b ? `<p>那個讓你意識到自己愛她／他的瞬間是：${b}</p>` : ''}
+          ${c ? `<p>你從前不理解，後來學會接受的缺點是：${c}</p>` : ''}
+          ${d ? `<p>你想與她／他一起做的平凡小事是：${d}</p>` : ''}
+          ${e ? `<p>你相信愛的那一刻是：${e}</p>` : ''}`;
+      }
+      output.style.display = "block";
+    } 
+</script>
+  <div class="story-section">
+    <h2>你的完整故事</h2>
+    <button onclick="showFullStory()">點我回顧你寫下的每一段</button>
+    <div class="result" id="finalStory" style="display: none; margin-top: 20px;"></div>
+  </div>
+
+  <div class="story-section">
+    <h2>故事共鳴牆（來自其他人）</h2>
+    <p>這些故事是其他觀眾匿名分享的片段，也許你會從中看到一些熟悉的心情。</p>
+    <div class="result" id="sharedStories">
+      <p>「她就像夜裡的微光，總是在我快要崩潰時，讓我安靜下來。」</p>
+      <p>「我記得她坐在便利商店外喝熱湯，那一刻我忽然明白，我想一直陪著她。」</p>
+      <p>「她有很多缺點，但我卻一一學會了擁抱，因為那就是她的全部。」</p>
+      <p>「我最想做的事，就是和她一起買菜煮飯，這樣就很幸福了。」</p>
+      <p>「當我看到她疲憊卻還對我笑時，我知道，我這輩子都不會離開她。」</p>
+    </div>
+  </div>
+  </div>
+  <div class="page-counter" id="pageCounter">1 / 1</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const textareas = document.querySelectorAll('textarea');
+      textareas.forEach(textarea => {
+        textarea.setAttribute('style', 'height:' + textarea.scrollHeight + 'px;overflow-y:hidden;');
+        textarea.addEventListener('input', () => {
+          textarea.style.height = 'auto';
+          textarea.style.height = textarea.scrollHeight + 'px';
+        });
+      });
+    });
+    </script>
+    
+  <script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+    const wrapper = document.querySelector('.horizontal-wrapper');
+    const counter = document.getElementById('pageCounter');
+    
+    function scrollToPage(index) {
+      if (index >= 0 && index < pages.length) {
+        currentPage = index;
+        wrapper.scrollTo({ left: pages[index].offsetLeft, behavior: 'smooth' });
+        updateCounter();
+      }
+    }
+    
+    function updateCounter() {
+      const totalPages = document.querySelectorAll('.horizontal-wrapper .page').length;
+  counter.textContent = `${currentPage + 1} / ${totalPages}`;
+}
+    
+    function updateArrows() {
+      pages.forEach((page, i) => {
+        page.style.setProperty('--show-left', i > 0 ? 'visible' : 'hidden');
+        page.style.setProperty('--show-right', i < pages.length - 1 ? 'visible' : 'hidden');
+      });
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') scrollToPage(currentPage + 1);
+      if (e.key === 'ArrowLeft') scrollToPage(currentPage - 1);
+    });
+
+    wrapper.addEventListener('scroll', () => {
+  const scrollLeft = wrapper.scrollLeft;
+  const pageWidth = pages[0].offsetWidth; 
+  currentPage = Math.round(scrollLeft / pageWidth);
+  updateCounter();
+});
+    const leftClick = document.getElementById('click-left');
+    const rightClick = document.getElementById('click-right');
+    
+    leftClick.addEventListener('click', () => {
+      scrollToPage(currentPage - 1);
+    });
+    
+    rightClick.addEventListener('click', () => {
+      scrollToPage(currentPage + 1);
+    });
+    
+    updateArrows();
+    updateCounter();
+    </script>
+    
+<div id="click-overlay" style="position: fixed; inset: 0; z-index: 9999; pointer-events: none;">
+  <div id="click-left" style="position: absolute; top: 0; left: 0; width: 15%; height: 100%; cursor: pointer; pointer-events: auto;"></div>
+  <div id="click-right" style="position: absolute; top: 0; right: 0; width: 15%; height: 100%; cursor: pointer; pointer-events: auto;"></div>
+</div>
+
+<script>
+ document.getElementById('click-left').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) scrollToPage(currentPage - 1);
+    });
+
+    document.getElementById('click-right').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) scrollToPage(currentPage + 1);
+    });
+
+</script>
+
+</body>
+</html>
